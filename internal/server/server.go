@@ -27,6 +27,7 @@ type Room struct {
 	Clients            map[string]*Client
 	PendingJoins       map[string]*Client     // Users waiting for approval
 	PendingSuggestions map[string]*Suggestion // Track suggestions waiting for host action
+	SkipVotes          map[string]map[string]bool // trackID -> voterIDs (democracy vote-skip)
 	DisconnectedUsers  map[string]*Session    // Users temporarily disconnected
 	State              *RoomState
 	BufferingUsers     map[string]bool // Track which users are still buffering
@@ -235,6 +236,8 @@ func (s *Server) handleMessage(c *Client, data []byte) {
 		s.handleReconnect(c, payloadBytes)
 	case MsgTypeSuggestTrack:
 		s.handleSuggestTrack(c, payloadBytes)
+	case MsgTypeVoteSkip:
+		s.handleVoteSkip(c, payloadBytes)
 	case MsgTypeApproveSuggestion:
 		s.handleApproveSuggestion(c, payloadBytes)
 	case MsgTypeRejectSuggestion:

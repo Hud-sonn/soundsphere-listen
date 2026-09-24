@@ -15,6 +15,7 @@ const (
 	MsgTypeRequestSync        = "request_sync"
 	MsgTypeReconnect          = "reconnect"
 	MsgTypeSuggestTrack       = "suggest_track"
+	MsgTypeVoteSkip           = "vote_skip"
 	MsgTypeApproveSuggestion  = "approve_suggestion"
 	MsgTypeRejectSuggestion   = "reject_suggestion"
 	MsgTypeClientCapabilities = "client_capabilities"
@@ -38,6 +39,7 @@ const (
 	MsgTypeUserReconnected    = "user_reconnected"
 	MsgTypeUserDisconnected   = "user_disconnected"
 	MsgTypeSuggestionReceived = "suggestion_received"
+	MsgTypeSkipVotes          = "skip_votes"
 	MsgTypeSuggestionApproved = "suggestion_approved"
 	MsgTypeSuggestionRejected = "suggestion_rejected"
 	MsgTypeServerCapabilities = "server_capabilities"
@@ -148,6 +150,17 @@ type PongPayload struct {
 // Suggestion payloads
 type SuggestTrackPayload struct {
 	TrackInfo *TrackInfo `json:"track_info"`
+}
+
+// Vote-skip payloads (democracy: guests vote, host auto-skips at threshold)
+type VoteSkipPayload struct {
+	TrackID string `json:"track_id"`
+}
+
+type SkipVotesPayload struct {
+	TrackID  string   `json:"track_id"`
+	VoterIDs []string `json:"voter_ids"`
+	Threshold int     `json:"threshold"`
 }
 
 type SuggestionReceivedPayload struct {

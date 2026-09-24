@@ -198,6 +198,8 @@ func (s *Server) handlePlaybackAction(c *Client, payload []byte) {
 		room.State.Position = 0
 		room.State.IsPlaying = false
 		room.State.LastUpdate = nowMs
+		// New track: previous skip votes no longer apply.
+		room.SkipVotes = make(map[string]map[string]bool)
 		room.HostStartPosition = 0
 		room.BufferingUsers = nil
 		p.TrackID = p.TrackInfo.ID

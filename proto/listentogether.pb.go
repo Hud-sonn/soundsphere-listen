@@ -949,6 +949,110 @@ func (x *SuggestTrackPayload) GetTrackInfo() *TrackInfo {
 	return nil
 }
 
+type VoteSkipPayload struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TrackId       string                 `protobuf:"bytes,1,opt,name=track_id,json=trackId,proto3" json:"track_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VoteSkipPayload) Reset() {
+	*x = VoteSkipPayload{}
+	mi := &file_listentogether_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VoteSkipPayload) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VoteSkipPayload) ProtoMessage() {}
+
+func (x *VoteSkipPayload) ProtoReflect() protoreflect.Message {
+	mi := &file_listentogether_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VoteSkipPayload.ProtoReflect.Descriptor instead.
+func (*VoteSkipPayload) Descriptor() ([]byte, []int) {
+	return file_listentogether_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *VoteSkipPayload) GetTrackId() string {
+	if x != nil {
+		return x.TrackId
+	}
+	return ""
+}
+
+type SkipVotesPayload struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TrackId       string                 `protobuf:"bytes,1,opt,name=track_id,json=trackId,proto3" json:"track_id,omitempty"`
+	VoterIds      []string               `protobuf:"bytes,2,rep,name=voter_ids,json=voterIds,proto3" json:"voter_ids,omitempty"`
+	Threshold     int32                  `protobuf:"varint,3,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SkipVotesPayload) Reset() {
+	*x = SkipVotesPayload{}
+	mi := &file_listentogether_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkipVotesPayload) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkipVotesPayload) ProtoMessage() {}
+
+func (x *SkipVotesPayload) ProtoReflect() protoreflect.Message {
+	mi := &file_listentogether_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SkipVotesPayload.ProtoReflect.Descriptor instead.
+func (*SkipVotesPayload) Descriptor() ([]byte, []int) {
+	return file_listentogether_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SkipVotesPayload) GetTrackId() string {
+	if x != nil {
+		return x.TrackId
+	}
+	return ""
+}
+
+func (x *SkipVotesPayload) GetVoterIds() []string {
+	if x != nil {
+		return x.VoterIds
+	}
+	return nil
+}
+
+func (x *SkipVotesPayload) GetThreshold() int32 {
+	if x != nil {
+		return x.Threshold
+	}
+	return 0
+}
+
 type ApproveSuggestionPayload struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SuggestionId  string                 `protobuf:"bytes,1,opt,name=suggestion_id,json=suggestionId,proto3" json:"suggestion_id,omitempty"`
@@ -958,7 +1062,7 @@ type ApproveSuggestionPayload struct {
 
 func (x *ApproveSuggestionPayload) Reset() {
 	*x = ApproveSuggestionPayload{}
-	mi := &file_listentogether_proto_msgTypes[15]
+	mi := &file_listentogether_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -970,7 +1074,7 @@ func (x *ApproveSuggestionPayload) String() string {
 func (*ApproveSuggestionPayload) ProtoMessage() {}
 
 func (x *ApproveSuggestionPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[15]
+	mi := &file_listentogether_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -983,7 +1087,7 @@ func (x *ApproveSuggestionPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApproveSuggestionPayload.ProtoReflect.Descriptor instead.
 func (*ApproveSuggestionPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{15}
+	return file_listentogether_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ApproveSuggestionPayload) GetSuggestionId() string {
@@ -1003,7 +1107,7 @@ type RejectSuggestionPayload struct {
 
 func (x *RejectSuggestionPayload) Reset() {
 	*x = RejectSuggestionPayload{}
-	mi := &file_listentogether_proto_msgTypes[16]
+	mi := &file_listentogether_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1015,7 +1119,7 @@ func (x *RejectSuggestionPayload) String() string {
 func (*RejectSuggestionPayload) ProtoMessage() {}
 
 func (x *RejectSuggestionPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[16]
+	mi := &file_listentogether_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1028,7 +1132,7 @@ func (x *RejectSuggestionPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejectSuggestionPayload.ProtoReflect.Descriptor instead.
 func (*RejectSuggestionPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{16}
+	return file_listentogether_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RejectSuggestionPayload) GetSuggestionId() string {
@@ -1054,7 +1158,7 @@ type ReconnectPayload struct {
 
 func (x *ReconnectPayload) Reset() {
 	*x = ReconnectPayload{}
-	mi := &file_listentogether_proto_msgTypes[17]
+	mi := &file_listentogether_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1066,7 +1170,7 @@ func (x *ReconnectPayload) String() string {
 func (*ReconnectPayload) ProtoMessage() {}
 
 func (x *ReconnectPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[17]
+	mi := &file_listentogether_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1079,7 +1183,7 @@ func (x *ReconnectPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReconnectPayload.ProtoReflect.Descriptor instead.
 func (*ReconnectPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{17}
+	return file_listentogether_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ReconnectPayload) GetSessionToken() string {
@@ -1100,7 +1204,7 @@ type RoomCreatedPayload struct {
 
 func (x *RoomCreatedPayload) Reset() {
 	*x = RoomCreatedPayload{}
-	mi := &file_listentogether_proto_msgTypes[18]
+	mi := &file_listentogether_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1112,7 +1216,7 @@ func (x *RoomCreatedPayload) String() string {
 func (*RoomCreatedPayload) ProtoMessage() {}
 
 func (x *RoomCreatedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[18]
+	mi := &file_listentogether_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1125,7 +1229,7 @@ func (x *RoomCreatedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoomCreatedPayload.ProtoReflect.Descriptor instead.
 func (*RoomCreatedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{18}
+	return file_listentogether_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RoomCreatedPayload) GetRoomCode() string {
@@ -1159,7 +1263,7 @@ type JoinRequestPayload struct {
 
 func (x *JoinRequestPayload) Reset() {
 	*x = JoinRequestPayload{}
-	mi := &file_listentogether_proto_msgTypes[19]
+	mi := &file_listentogether_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1171,7 +1275,7 @@ func (x *JoinRequestPayload) String() string {
 func (*JoinRequestPayload) ProtoMessage() {}
 
 func (x *JoinRequestPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[19]
+	mi := &file_listentogether_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1184,7 +1288,7 @@ func (x *JoinRequestPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinRequestPayload.ProtoReflect.Descriptor instead.
 func (*JoinRequestPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{19}
+	return file_listentogether_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *JoinRequestPayload) GetUserId() string {
@@ -1213,7 +1317,7 @@ type JoinApprovedPayload struct {
 
 func (x *JoinApprovedPayload) Reset() {
 	*x = JoinApprovedPayload{}
-	mi := &file_listentogether_proto_msgTypes[20]
+	mi := &file_listentogether_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1225,7 +1329,7 @@ func (x *JoinApprovedPayload) String() string {
 func (*JoinApprovedPayload) ProtoMessage() {}
 
 func (x *JoinApprovedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[20]
+	mi := &file_listentogether_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1238,7 +1342,7 @@ func (x *JoinApprovedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinApprovedPayload.ProtoReflect.Descriptor instead.
 func (*JoinApprovedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{20}
+	return file_listentogether_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *JoinApprovedPayload) GetRoomCode() string {
@@ -1278,7 +1382,7 @@ type JoinRejectedPayload struct {
 
 func (x *JoinRejectedPayload) Reset() {
 	*x = JoinRejectedPayload{}
-	mi := &file_listentogether_proto_msgTypes[21]
+	mi := &file_listentogether_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1290,7 +1394,7 @@ func (x *JoinRejectedPayload) String() string {
 func (*JoinRejectedPayload) ProtoMessage() {}
 
 func (x *JoinRejectedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[21]
+	mi := &file_listentogether_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +1407,7 @@ func (x *JoinRejectedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinRejectedPayload.ProtoReflect.Descriptor instead.
 func (*JoinRejectedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{21}
+	return file_listentogether_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *JoinRejectedPayload) GetReason() string {
@@ -1323,7 +1427,7 @@ type UserJoinedPayload struct {
 
 func (x *UserJoinedPayload) Reset() {
 	*x = UserJoinedPayload{}
-	mi := &file_listentogether_proto_msgTypes[22]
+	mi := &file_listentogether_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1335,7 +1439,7 @@ func (x *UserJoinedPayload) String() string {
 func (*UserJoinedPayload) ProtoMessage() {}
 
 func (x *UserJoinedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[22]
+	mi := &file_listentogether_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1348,7 +1452,7 @@ func (x *UserJoinedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserJoinedPayload.ProtoReflect.Descriptor instead.
 func (*UserJoinedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{22}
+	return file_listentogether_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *UserJoinedPayload) GetUserId() string {
@@ -1375,7 +1479,7 @@ type UserLeftPayload struct {
 
 func (x *UserLeftPayload) Reset() {
 	*x = UserLeftPayload{}
-	mi := &file_listentogether_proto_msgTypes[23]
+	mi := &file_listentogether_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1387,7 +1491,7 @@ func (x *UserLeftPayload) String() string {
 func (*UserLeftPayload) ProtoMessage() {}
 
 func (x *UserLeftPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[23]
+	mi := &file_listentogether_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1400,7 +1504,7 @@ func (x *UserLeftPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserLeftPayload.ProtoReflect.Descriptor instead.
 func (*UserLeftPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{23}
+	return file_listentogether_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UserLeftPayload) GetUserId() string {
@@ -1427,7 +1531,7 @@ type BufferWaitPayload struct {
 
 func (x *BufferWaitPayload) Reset() {
 	*x = BufferWaitPayload{}
-	mi := &file_listentogether_proto_msgTypes[24]
+	mi := &file_listentogether_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1439,7 +1543,7 @@ func (x *BufferWaitPayload) String() string {
 func (*BufferWaitPayload) ProtoMessage() {}
 
 func (x *BufferWaitPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[24]
+	mi := &file_listentogether_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1452,7 +1556,7 @@ func (x *BufferWaitPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BufferWaitPayload.ProtoReflect.Descriptor instead.
 func (*BufferWaitPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{24}
+	return file_listentogether_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *BufferWaitPayload) GetTrackId() string {
@@ -1478,7 +1582,7 @@ type BufferCompletePayload struct {
 
 func (x *BufferCompletePayload) Reset() {
 	*x = BufferCompletePayload{}
-	mi := &file_listentogether_proto_msgTypes[25]
+	mi := &file_listentogether_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1490,7 +1594,7 @@ func (x *BufferCompletePayload) String() string {
 func (*BufferCompletePayload) ProtoMessage() {}
 
 func (x *BufferCompletePayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[25]
+	mi := &file_listentogether_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1503,7 +1607,7 @@ func (x *BufferCompletePayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BufferCompletePayload.ProtoReflect.Descriptor instead.
 func (*BufferCompletePayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{25}
+	return file_listentogether_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *BufferCompletePayload) GetTrackId() string {
@@ -1523,7 +1627,7 @@ type ErrorPayload struct {
 
 func (x *ErrorPayload) Reset() {
 	*x = ErrorPayload{}
-	mi := &file_listentogether_proto_msgTypes[26]
+	mi := &file_listentogether_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1535,7 +1639,7 @@ func (x *ErrorPayload) String() string {
 func (*ErrorPayload) ProtoMessage() {}
 
 func (x *ErrorPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[26]
+	mi := &file_listentogether_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1548,7 +1652,7 @@ func (x *ErrorPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorPayload.ProtoReflect.Descriptor instead.
 func (*ErrorPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{26}
+	return file_listentogether_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ErrorPayload) GetCode() string {
@@ -1575,7 +1679,7 @@ type HostChangedPayload struct {
 
 func (x *HostChangedPayload) Reset() {
 	*x = HostChangedPayload{}
-	mi := &file_listentogether_proto_msgTypes[27]
+	mi := &file_listentogether_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1587,7 +1691,7 @@ func (x *HostChangedPayload) String() string {
 func (*HostChangedPayload) ProtoMessage() {}
 
 func (x *HostChangedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[27]
+	mi := &file_listentogether_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1600,7 +1704,7 @@ func (x *HostChangedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HostChangedPayload.ProtoReflect.Descriptor instead.
 func (*HostChangedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{27}
+	return file_listentogether_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *HostChangedPayload) GetNewHostId() string {
@@ -1626,7 +1730,7 @@ type KickedPayload struct {
 
 func (x *KickedPayload) Reset() {
 	*x = KickedPayload{}
-	mi := &file_listentogether_proto_msgTypes[28]
+	mi := &file_listentogether_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1638,7 +1742,7 @@ func (x *KickedPayload) String() string {
 func (*KickedPayload) ProtoMessage() {}
 
 func (x *KickedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[28]
+	mi := &file_listentogether_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1651,7 +1755,7 @@ func (x *KickedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KickedPayload.ProtoReflect.Descriptor instead.
 func (*KickedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{28}
+	return file_listentogether_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *KickedPayload) GetReason() string {
@@ -1676,7 +1780,7 @@ type SyncStatePayload struct {
 
 func (x *SyncStatePayload) Reset() {
 	*x = SyncStatePayload{}
-	mi := &file_listentogether_proto_msgTypes[29]
+	mi := &file_listentogether_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1688,7 +1792,7 @@ func (x *SyncStatePayload) String() string {
 func (*SyncStatePayload) ProtoMessage() {}
 
 func (x *SyncStatePayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[29]
+	mi := &file_listentogether_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1701,7 +1805,7 @@ func (x *SyncStatePayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncStatePayload.ProtoReflect.Descriptor instead.
 func (*SyncStatePayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{29}
+	return file_listentogether_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *SyncStatePayload) GetCurrentTrack() *TrackInfo {
@@ -1765,7 +1869,7 @@ type PongPayload struct {
 
 func (x *PongPayload) Reset() {
 	*x = PongPayload{}
-	mi := &file_listentogether_proto_msgTypes[30]
+	mi := &file_listentogether_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1777,7 +1881,7 @@ func (x *PongPayload) String() string {
 func (*PongPayload) ProtoMessage() {}
 
 func (x *PongPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[30]
+	mi := &file_listentogether_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1790,7 +1894,7 @@ func (x *PongPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PongPayload.ProtoReflect.Descriptor instead.
 func (*PongPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{30}
+	return file_listentogether_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *PongPayload) GetClientTime() int64 {
@@ -1833,7 +1937,7 @@ type ReconnectedPayload struct {
 
 func (x *ReconnectedPayload) Reset() {
 	*x = ReconnectedPayload{}
-	mi := &file_listentogether_proto_msgTypes[31]
+	mi := &file_listentogether_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1845,7 +1949,7 @@ func (x *ReconnectedPayload) String() string {
 func (*ReconnectedPayload) ProtoMessage() {}
 
 func (x *ReconnectedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[31]
+	mi := &file_listentogether_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1858,7 +1962,7 @@ func (x *ReconnectedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReconnectedPayload.ProtoReflect.Descriptor instead.
 func (*ReconnectedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{31}
+	return file_listentogether_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ReconnectedPayload) GetRoomCode() string {
@@ -1899,7 +2003,7 @@ type UserReconnectedPayload struct {
 
 func (x *UserReconnectedPayload) Reset() {
 	*x = UserReconnectedPayload{}
-	mi := &file_listentogether_proto_msgTypes[32]
+	mi := &file_listentogether_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1911,7 +2015,7 @@ func (x *UserReconnectedPayload) String() string {
 func (*UserReconnectedPayload) ProtoMessage() {}
 
 func (x *UserReconnectedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[32]
+	mi := &file_listentogether_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1924,7 +2028,7 @@ func (x *UserReconnectedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserReconnectedPayload.ProtoReflect.Descriptor instead.
 func (*UserReconnectedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{32}
+	return file_listentogether_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *UserReconnectedPayload) GetUserId() string {
@@ -1951,7 +2055,7 @@ type UserDisconnectedPayload struct {
 
 func (x *UserDisconnectedPayload) Reset() {
 	*x = UserDisconnectedPayload{}
-	mi := &file_listentogether_proto_msgTypes[33]
+	mi := &file_listentogether_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1963,7 +2067,7 @@ func (x *UserDisconnectedPayload) String() string {
 func (*UserDisconnectedPayload) ProtoMessage() {}
 
 func (x *UserDisconnectedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[33]
+	mi := &file_listentogether_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1976,7 +2080,7 @@ func (x *UserDisconnectedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDisconnectedPayload.ProtoReflect.Descriptor instead.
 func (*UserDisconnectedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{33}
+	return file_listentogether_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UserDisconnectedPayload) GetUserId() string {
@@ -2005,7 +2109,7 @@ type SuggestionReceivedPayload struct {
 
 func (x *SuggestionReceivedPayload) Reset() {
 	*x = SuggestionReceivedPayload{}
-	mi := &file_listentogether_proto_msgTypes[34]
+	mi := &file_listentogether_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2017,7 +2121,7 @@ func (x *SuggestionReceivedPayload) String() string {
 func (*SuggestionReceivedPayload) ProtoMessage() {}
 
 func (x *SuggestionReceivedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[34]
+	mi := &file_listentogether_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2030,7 +2134,7 @@ func (x *SuggestionReceivedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestionReceivedPayload.ProtoReflect.Descriptor instead.
 func (*SuggestionReceivedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{34}
+	return file_listentogether_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *SuggestionReceivedPayload) GetSuggestionId() string {
@@ -2071,7 +2175,7 @@ type SuggestionApprovedPayload struct {
 
 func (x *SuggestionApprovedPayload) Reset() {
 	*x = SuggestionApprovedPayload{}
-	mi := &file_listentogether_proto_msgTypes[35]
+	mi := &file_listentogether_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2083,7 +2187,7 @@ func (x *SuggestionApprovedPayload) String() string {
 func (*SuggestionApprovedPayload) ProtoMessage() {}
 
 func (x *SuggestionApprovedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[35]
+	mi := &file_listentogether_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2096,7 +2200,7 @@ func (x *SuggestionApprovedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestionApprovedPayload.ProtoReflect.Descriptor instead.
 func (*SuggestionApprovedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{35}
+	return file_listentogether_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *SuggestionApprovedPayload) GetSuggestionId() string {
@@ -2123,7 +2227,7 @@ type SuggestionRejectedPayload struct {
 
 func (x *SuggestionRejectedPayload) Reset() {
 	*x = SuggestionRejectedPayload{}
-	mi := &file_listentogether_proto_msgTypes[36]
+	mi := &file_listentogether_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2135,7 +2239,7 @@ func (x *SuggestionRejectedPayload) String() string {
 func (*SuggestionRejectedPayload) ProtoMessage() {}
 
 func (x *SuggestionRejectedPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[36]
+	mi := &file_listentogether_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2148,7 +2252,7 @@ func (x *SuggestionRejectedPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestionRejectedPayload.ProtoReflect.Descriptor instead.
 func (*SuggestionRejectedPayload) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{36}
+	return file_listentogether_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *SuggestionRejectedPayload) GetSuggestionId() string {
@@ -2177,7 +2281,7 @@ type ClientCapabilities struct {
 
 func (x *ClientCapabilities) Reset() {
 	*x = ClientCapabilities{}
-	mi := &file_listentogether_proto_msgTypes[37]
+	mi := &file_listentogether_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2189,7 +2293,7 @@ func (x *ClientCapabilities) String() string {
 func (*ClientCapabilities) ProtoMessage() {}
 
 func (x *ClientCapabilities) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[37]
+	mi := &file_listentogether_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2202,7 +2306,7 @@ func (x *ClientCapabilities) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientCapabilities.ProtoReflect.Descriptor instead.
 func (*ClientCapabilities) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{37}
+	return file_listentogether_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ClientCapabilities) GetSupportsProtobuf() bool {
@@ -2237,7 +2341,7 @@ type ServerCapabilities struct {
 
 func (x *ServerCapabilities) Reset() {
 	*x = ServerCapabilities{}
-	mi := &file_listentogether_proto_msgTypes[38]
+	mi := &file_listentogether_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2249,7 +2353,7 @@ func (x *ServerCapabilities) String() string {
 func (*ServerCapabilities) ProtoMessage() {}
 
 func (x *ServerCapabilities) ProtoReflect() protoreflect.Message {
-	mi := &file_listentogether_proto_msgTypes[38]
+	mi := &file_listentogether_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2262,7 +2366,7 @@ func (x *ServerCapabilities) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServerCapabilities.ProtoReflect.Descriptor instead.
 func (*ServerCapabilities) Descriptor() ([]byte, []int) {
-	return file_listentogether_proto_rawDescGZIP(), []int{38}
+	return file_listentogether_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *ServerCapabilities) GetSupportsProtobuf() bool {
@@ -2365,7 +2469,13 @@ const file_listentogether_proto_rawDesc = "" +
 	"\vnew_host_id\x18\x01 \x01(\tR\tnewHostId\"O\n" +
 	"\x13SuggestTrackPayload\x128\n" +
 	"\n" +
-	"track_info\x18\x01 \x01(\v2\x19.listentogether.TrackInfoR\ttrackInfo\"?\n" +
+	"track_info\x18\x01 \x01(\v2\x19.listentogether.TrackInfoR\ttrackInfo\",\n" +
+	"\x0fVoteSkipPayload\x12\x19\n" +
+	"\btrack_id\x18\x01 \x01(\tR\atrackId\"h\n" +
+	"\x10SkipVotesPayload\x12\x19\n" +
+	"\btrack_id\x18\x01 \x01(\tR\atrackId\x12\x1b\n" +
+	"\tvoter_ids\x18\x02 \x03(\tR\bvoterIds\x12\x1c\n" +
+	"\tthreshold\x18\x03 \x01(\x05R\tthreshold\"?\n" +
 	"\x18ApproveSuggestionPayload\x12#\n" +
 	"\rsuggestion_id\x18\x01 \x01(\tR\fsuggestionId\"V\n" +
 	"\x17RejectSuggestionPayload\x12#\n" +
@@ -2470,7 +2580,7 @@ func file_listentogether_proto_rawDescGZIP() []byte {
 	return file_listentogether_proto_rawDescData
 }
 
-var file_listentogether_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_listentogether_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_listentogether_proto_goTypes = []any{
 	(*Envelope)(nil),                  // 0: listentogether.Envelope
 	(*TrackInfo)(nil),                 // 1: listentogether.TrackInfo
@@ -2487,30 +2597,32 @@ var file_listentogether_proto_goTypes = []any{
 	(*KickUserPayload)(nil),           // 12: listentogether.KickUserPayload
 	(*TransferHostPayload)(nil),       // 13: listentogether.TransferHostPayload
 	(*SuggestTrackPayload)(nil),       // 14: listentogether.SuggestTrackPayload
-	(*ApproveSuggestionPayload)(nil),  // 15: listentogether.ApproveSuggestionPayload
-	(*RejectSuggestionPayload)(nil),   // 16: listentogether.RejectSuggestionPayload
-	(*ReconnectPayload)(nil),          // 17: listentogether.ReconnectPayload
-	(*RoomCreatedPayload)(nil),        // 18: listentogether.RoomCreatedPayload
-	(*JoinRequestPayload)(nil),        // 19: listentogether.JoinRequestPayload
-	(*JoinApprovedPayload)(nil),       // 20: listentogether.JoinApprovedPayload
-	(*JoinRejectedPayload)(nil),       // 21: listentogether.JoinRejectedPayload
-	(*UserJoinedPayload)(nil),         // 22: listentogether.UserJoinedPayload
-	(*UserLeftPayload)(nil),           // 23: listentogether.UserLeftPayload
-	(*BufferWaitPayload)(nil),         // 24: listentogether.BufferWaitPayload
-	(*BufferCompletePayload)(nil),     // 25: listentogether.BufferCompletePayload
-	(*ErrorPayload)(nil),              // 26: listentogether.ErrorPayload
-	(*HostChangedPayload)(nil),        // 27: listentogether.HostChangedPayload
-	(*KickedPayload)(nil),             // 28: listentogether.KickedPayload
-	(*SyncStatePayload)(nil),          // 29: listentogether.SyncStatePayload
-	(*PongPayload)(nil),               // 30: listentogether.PongPayload
-	(*ReconnectedPayload)(nil),        // 31: listentogether.ReconnectedPayload
-	(*UserReconnectedPayload)(nil),    // 32: listentogether.UserReconnectedPayload
-	(*UserDisconnectedPayload)(nil),   // 33: listentogether.UserDisconnectedPayload
-	(*SuggestionReceivedPayload)(nil), // 34: listentogether.SuggestionReceivedPayload
-	(*SuggestionApprovedPayload)(nil), // 35: listentogether.SuggestionApprovedPayload
-	(*SuggestionRejectedPayload)(nil), // 36: listentogether.SuggestionRejectedPayload
-	(*ClientCapabilities)(nil),        // 37: listentogether.ClientCapabilities
-	(*ServerCapabilities)(nil),        // 38: listentogether.ServerCapabilities
+	(*VoteSkipPayload)(nil),           // 15: listentogether.VoteSkipPayload
+	(*SkipVotesPayload)(nil),          // 16: listentogether.SkipVotesPayload
+	(*ApproveSuggestionPayload)(nil),  // 17: listentogether.ApproveSuggestionPayload
+	(*RejectSuggestionPayload)(nil),   // 18: listentogether.RejectSuggestionPayload
+	(*ReconnectPayload)(nil),          // 19: listentogether.ReconnectPayload
+	(*RoomCreatedPayload)(nil),        // 20: listentogether.RoomCreatedPayload
+	(*JoinRequestPayload)(nil),        // 21: listentogether.JoinRequestPayload
+	(*JoinApprovedPayload)(nil),       // 22: listentogether.JoinApprovedPayload
+	(*JoinRejectedPayload)(nil),       // 23: listentogether.JoinRejectedPayload
+	(*UserJoinedPayload)(nil),         // 24: listentogether.UserJoinedPayload
+	(*UserLeftPayload)(nil),           // 25: listentogether.UserLeftPayload
+	(*BufferWaitPayload)(nil),         // 26: listentogether.BufferWaitPayload
+	(*BufferCompletePayload)(nil),     // 27: listentogether.BufferCompletePayload
+	(*ErrorPayload)(nil),              // 28: listentogether.ErrorPayload
+	(*HostChangedPayload)(nil),        // 29: listentogether.HostChangedPayload
+	(*KickedPayload)(nil),             // 30: listentogether.KickedPayload
+	(*SyncStatePayload)(nil),          // 31: listentogether.SyncStatePayload
+	(*PongPayload)(nil),               // 32: listentogether.PongPayload
+	(*ReconnectedPayload)(nil),        // 33: listentogether.ReconnectedPayload
+	(*UserReconnectedPayload)(nil),    // 34: listentogether.UserReconnectedPayload
+	(*UserDisconnectedPayload)(nil),   // 35: listentogether.UserDisconnectedPayload
+	(*SuggestionReceivedPayload)(nil), // 36: listentogether.SuggestionReceivedPayload
+	(*SuggestionApprovedPayload)(nil), // 37: listentogether.SuggestionApprovedPayload
+	(*SuggestionRejectedPayload)(nil), // 38: listentogether.SuggestionRejectedPayload
+	(*ClientCapabilities)(nil),        // 39: listentogether.ClientCapabilities
+	(*ServerCapabilities)(nil),        // 40: listentogether.ServerCapabilities
 }
 var file_listentogether_proto_depIdxs = []int32{
 	2,  // 0: listentogether.RoomState.users:type_name -> listentogether.UserInfo
@@ -2543,7 +2655,7 @@ func file_listentogether_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_listentogether_proto_rawDesc), len(file_listentogether_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   39,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

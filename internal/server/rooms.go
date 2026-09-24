@@ -168,6 +168,54 @@ func (s *Server) handleApproveSuggestion(c *Client, payload []byte) {
 		zap.String("track_id", trackID))
 }
 
+// handleVoteSkip records one guest's vote to skip the current track and
+// broadcasts the running tally. The host auto-skips at majority; votes reset
+// on every track change (see ActionChangeTrack below).
+func (s *Server) handleVoteSkip(c *Client, payload []byte) {
+	var p VoteSkipPayload
+	if err := decodePayload(payload, MsgTypeVoteSkip, &p); err != nil {
+		c.sendError(s.logger, "invalid_payload", "Invalid vote skip payload")
+		return
+	}
+	room := c.currentRoom()
+	if room == nil {
+		c.sendError(s.logger, "not_in_room", "You are not in a room")
+		return
+	}
+	room.mu.Lock()
+	if room.State == nil || room.State.CurrentTrack == nil ||
+		(room.State.CurrentTrack.ID != "" && p.TrackID != "" && p.TrackID != room.State.CurrentTrack.ID) {
+		room.mu.Unlock()
+		return // stale vote for a previous track: drop silently
+	}
+	if room.SkipVotes == nil {
+		room.SkipVotes = make(map[string]map[string]bool)
+	}
+	trackID := room.State.CurrentTrack.ID
+	voters, ok := room.SkipVotes[trackID]
+	if !ok {
+		voters = make(map[string]bool)
+		room.SkipVotes[trackID] = voters
+	}
+	voters[c.clientID()] = true
+	ids := make([]string, 0, len(voters))
+	for id := range voters {
+		ids = append(ids, id)
+	}
+	threshold := len(room.Clients) / 2
+	if threshold < 1 {
+		threshold = 1
+	}
+	update := SkipVotesPayload{TrackID: trackID, VoterIDs: ids, Threshold: threshold}
+	clients := roomClientsLocked(room)
+	room.mu.Unlock()
+	sendMessageToClients(s.logger, clients, MsgTypeSkipVotes, update)
+	s.logger.Info("Skip vote recorded",
+		zap.String("room_code", room.Code),
+		zap.String("track_id", trackID),
+		zap.Int("votes", len(ids)))
+}
+
 func (s *Server) handleRejectSuggestion(c *Client, payload []byte) {
 	var p RejectSuggestionPayload
 	if err := decodePayload(payload, MsgTypeRejectSuggestion, &p); err != nil {
@@ -282,6 +330,7 @@ func (s *Server) handleCreateRoom(c *Client, payload []byte) {
 		Host:              c,
 		Clients:           make(map[string]*Client),
 		PendingJoins:      make(map[string]*Client),
+		SkipVotes:         make(map[string]map[string]bool),
 		DisconnectedUsers: make(map[string]*Session),
 		BufferingUsers:    make(map[string]bool),
 		State: &RoomState{

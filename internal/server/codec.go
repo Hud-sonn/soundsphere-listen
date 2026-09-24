@@ -197,6 +197,10 @@ func toProtoMessage(payload interface{}) (proto.Message, error) {
 			pbPayload.TrackInfo = trackInfoToProto(p.TrackInfo)
 		}
 		return pbPayload, nil
+	case *VoteSkipPayload:
+		return &pb.VoteSkipPayload{TrackId: p.TrackID}, nil
+	case *SkipVotesPayload:
+		return &pb.SkipVotesPayload{TrackId: p.TrackID, VoterIds: p.VoterIDs, Threshold: int32(p.Threshold)}, nil
 	case *ApproveSuggestionPayload:
 		return &pb.ApproveSuggestionPayload{SuggestionId: p.SuggestionID}, nil
 	case *RejectSuggestionPayload:
@@ -498,6 +502,12 @@ func fromProtoMessage(msgType string, data []byte) (interface{}, error) {
 			payload.TrackInfo = protoToTrackInfo(pbMsg.TrackInfo)
 		}
 		return payload, nil
+	case MsgTypeVoteSkip:
+		var pbMsg pb.VoteSkipPayload
+		if err := proto.Unmarshal(data, &pbMsg); err != nil {
+			return nil, err
+		}
+		return &VoteSkipPayload{TrackID: pbMsg.TrackId}, nil
 	case MsgTypeApproveSuggestion:
 		var pb pb.ApproveSuggestionPayload
 		if err := proto.Unmarshal(data, &pb); err != nil {

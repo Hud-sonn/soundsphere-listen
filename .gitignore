@@ -2,6 +2,6 @@
 # Fork change: generated protobuf code IS committed here so builders
 # (Pxxl native Go, Render) don't need protoc/submodules at build time.
 !proto/listentogether.pb.go
-/metroserver
+/soundsphere-listen
 server_state.json
 coverage.out

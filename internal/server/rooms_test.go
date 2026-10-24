@@ -1,10 +1,11 @@
 package server
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
-	pb "github.com/MetrolistGroup/metroserver/proto"
+	pb "github.com/Hud-sonn/soundsphere-listen/proto"
 )
 
 func roomTestFixture() (*Server, *Room, *Client, *Client) {
@@ -454,4 +455,82 @@ func TestLeaveRoomEmptyAndGuest(t *testing.T) {
 
 	server := testServer()
 	server.leaveRoom(newClient("outside", nil))
+}
+
+func TestSuggestionDedupeAndPerGuestCap(t *testing.T) {
+	suggest := func(server *Server, guest *Client, id string) {
+		t.Helper()
+		server.handleSuggestTrack(guest, encodeTestPayload(t, MsgTypeSuggestTrack, &SuggestTrackPayload{
+			TrackInfo: &TrackInfo{ID: id, Title: "Song " + id},
+		}))
+	}
+
+	t.Run("current track", func(t *testing.T) {
+		server, room, _, guest := roomTestFixture()
+		room.State.CurrentTrack = &TrackInfo{ID: "now", Title: "Now"}
+		suggest(server, guest, "now")
+		receiveRoomError(t, guest, "duplicate_track")
+	})
+
+	t.Run("queued track", func(t *testing.T) {
+		server, room, _, guest := roomTestFixture()
+		room.State.Queue = []TrackInfo{{ID: "next", Title: "Next"}}
+		suggest(server, guest, "next")
+		receiveRoomError(t, guest, "duplicate_track")
+	})
+
+	t.Run("already pending from another guest", func(t *testing.T) {
+		server, room, _, guest := roomTestFixture()
+		room.PendingSuggestions["s1"] = &Suggestion{
+			ID:           "s1",
+			FromUserID:   "someone-else",
+			FromUsername: "Other",
+			Track:        &TrackInfo{ID: "dup", Title: "Dup"},
+		}
+		suggest(server, guest, "dup")
+		receiveRoomError(t, guest, "duplicate_track")
+	})
+
+	t.Run("per guest cap", func(t *testing.T) {
+		server, _, host, guest := roomTestFixture()
+		for i := 0; i < MaxPendingSuggestionsPerUser; i++ {
+			suggest(server, guest, fmt.Sprintf("track-%d", i))
+			var received pb.SuggestionReceivedPayload
+			if got := receiveTestMessage(t, host, &received); got != MsgTypeSuggestionReceived {
+				t.Fatalf("message type = %q, want %q", got, MsgTypeSuggestionReceived)
+			}
+		}
+		suggest(server, guest, "track-overflow")
+		receiveRoomError(t, guest, "suggestions_full")
+	})
+}
+
+// A new host must inherit whatever is still waiting, otherwise suggestions sent
+// to the previous host would be invisible until the room was rejoined.
+func TestHostTransferReplaysPendingSuggestions(t *testing.T) {
+	server, room, host, guest := roomTestFixture()
+	room.PendingSuggestions["s1"] = &Suggestion{
+		ID:           "s1",
+		FromUserID:   "guest",
+		FromUsername: "Guest",
+		Track:        &TrackInfo{ID: "track-1", Title: "Song"},
+	}
+
+	server.handleTransferHost(host, encodeTestPayload(t, MsgTypeTransferHost, &TransferHostPayload{NewHostID: "guest"}))
+	if room.Host != guest {
+		t.Fatalf("host = %v, want guest", room.Host)
+	}
+
+	var changed pb.HostChangedPayload
+	if got := receiveTestMessage(t, guest, &changed); got != MsgTypeHostChanged {
+		t.Fatalf("message type = %q, want %q", got, MsgTypeHostChanged)
+	}
+
+	var replay pb.SuggestionReceivedPayload
+	if got := receiveTestMessage(t, guest, &replay); got != MsgTypeSuggestionReceived {
+		t.Fatalf("message type = %q, want %q", got, MsgTypeSuggestionReceived)
+	}
+	if replay.SuggestionId != "s1" || replay.FromUserId != "guest" || replay.TrackInfo.GetId() != "track-1" {
+		t.Fatalf("unexpected replay payload: %#v", &replay)
+	}
 }

@@ -8,6 +8,29 @@ import (
 	"go.uber.org/zap"
 )
 
+// pendingSuggestionForTrack reports whether the track is already waiting for
+// the host, regardless of which guest sent it.
+func pendingSuggestionForTrack(pending map[string]*Suggestion, trackID string) bool {
+	for _, suggestion := range pending {
+		if suggestion != nil && suggestion.Track != nil && suggestion.Track.ID == trackID {
+			return true
+		}
+	}
+	return false
+}
+
+// countPendingSuggestionsBy returns how many suggestions one guest still has
+// waiting, so a single user cannot monopolise the host's list.
+func countPendingSuggestionsBy(pending map[string]*Suggestion, userID string) int {
+	count := 0
+	for _, suggestion := range pending {
+		if suggestion != nil && suggestion.FromUserID == userID {
+			count++
+		}
+	}
+	return count
+}
+
 func (s *Server) handleSuggestTrack(c *Client, payload []byte) {
 	var p SuggestTrackPayload
 	if err := decodePayload(payload, MsgTypeSuggestTrack, &p); err != nil {
@@ -47,8 +70,23 @@ func (s *Server) handleSuggestTrack(c *Client, payload []byte) {
 		return
 	}
 
+	// Reject tracks that are already current, queued, or waiting, whichever
+	// guest sent them, so one song cannot fill the host's list with duplicates.
+	if (room.State.CurrentTrack != nil && room.State.CurrentTrack.ID == p.TrackInfo.ID) ||
+		containsTrackID(room.State.Queue, p.TrackInfo.ID) ||
+		pendingSuggestionForTrack(room.PendingSuggestions, p.TrackInfo.ID) {
+		room.mu.Unlock()
+		c.sendError(s.logger, "duplicate_track", "Track is already playing, queued, or suggested")
+		return
+	}
+
 	if room.PendingSuggestions == nil {
 		room.PendingSuggestions = make(map[string]*Suggestion)
+	}
+	if countPendingSuggestionsBy(room.PendingSuggestions, clientID) >= MaxPendingSuggestionsPerUser {
+		room.mu.Unlock()
+		c.sendError(s.logger, "suggestions_full", "You already have the maximum pending suggestions")
+		return
 	}
 	if len(room.PendingSuggestions) >= MaxPendingSuggestions {
 		room.mu.Unlock()
@@ -801,6 +839,21 @@ func (s *Server) handleTransferHost(c *Client, payload []byte) {
 		if client != nil {
 			client.sendMessage(s.logger, MsgTypeHostChanged, hostChangedPayload)
 		}
+	}
+
+	// The new host inherits the pending list. Without this replay, suggestions
+	// sent while the previous host was connected would stay invisible until the
+	// room was rejoined.
+	for _, suggestion := range room.PendingSuggestions {
+		if suggestion == nil {
+			continue
+		}
+		newHostClient.sendMessage(s.logger, MsgTypeSuggestionReceived, SuggestionReceivedPayload{
+			SuggestionID: suggestion.ID,
+			FromUserID:   suggestion.FromUserID,
+			FromUsername: suggestion.FromUsername,
+			TrackInfo:    cloneTrackInfo(suggestion.Track),
+		})
 	}
 
 	s.logger.Info("Host transferred",

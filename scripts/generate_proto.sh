@@ -6,12 +6,11 @@ set -e
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-PROTO_DIR="./metroproto"
+PROTO_DIR="./proto"
 OUT_DIR="./proto"
 
 if [ ! -f "$PROTO_DIR/listentogether.proto" ]; then
     echo "Missing proto file at $PROTO_DIR/listentogether.proto"
-    echo "Did you initialize submodules? Try: git submodule update --init --recursive"
     exit 1
 fi
 

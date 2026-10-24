@@ -2565,8 +2565,8 @@ const file_listentogether_proto_rawDesc = "" +
 	"\x12ServerCapabilities\x12+\n" +
 	"\x11supports_protobuf\x18\x01 \x01(\bR\x10supportsProtobuf\x121\n" +
 	"\x14supports_compression\x18\x02 \x01(\bR\x13supportsCompression\x12%\n" +
-	"\x0eserver_version\x18\x03 \x01(\tR\rserverVersionBi\n" +
-	"(com.metrolist.music.listentogether.protoB\x0eListentogetherP\x00Z+github.com/MetrolistGroup/metroserver/protob\x06proto3"
+	"\x0eserver_version\x18\x03 \x01(\tR\rserverVersionBl\n" +
+	"*com.soundsphere.music.listentogether.protoB\x0eListentogetherP\x00Z,github.com/Hud-sonn/soundsphere-listen/protob\x06proto3"
 
 var (
 	file_listentogether_proto_rawDescOnce sync.Once

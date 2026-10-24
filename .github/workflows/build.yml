@@ -140,12 +140,12 @@ jobs:
               run: go mod download
 
             - name: Build
-              run: go build -v -o metroserver ./cmd/metroserver
+              run: go build -v -o soundsphere-listen ./cmd/soundsphere-listen
 
             - name: Run basic tests
               run: |
                   # Test that the server binary exists and is executable
-                  test -x ./metroserver
+                  test -x ./soundsphere-listen
                   echo "✓ Binary built successfully"
 
             - name: Set up Docker Buildx

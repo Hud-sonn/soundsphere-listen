@@ -25,10 +25,10 @@ type Room struct {
 	Code               string
 	Host               *Client
 	Clients            map[string]*Client
-	PendingJoins       map[string]*Client     // Users waiting for approval
-	PendingSuggestions map[string]*Suggestion // Track suggestions waiting for host action
+	PendingJoins       map[string]*Client         // Users waiting for approval
+	PendingSuggestions map[string]*Suggestion     // Track suggestions waiting for host action
 	SkipVotes          map[string]map[string]bool // trackID -> voterIDs (democracy vote-skip)
-	DisconnectedUsers  map[string]*Session    // Users temporarily disconnected
+	DisconnectedUsers  map[string]*Session        // Users temporarily disconnected
 	State              *RoomState
 	BufferingUsers     map[string]bool // Track which users are still buffering
 	HostStartPosition  int64           // Host's position when buffering started
@@ -81,6 +81,9 @@ const (
 	MaxQueueSize          = 1000
 	MaxPendingJoins       = 100
 	MaxPendingSuggestions = 100
+	// MaxPendingSuggestionsPerUser keeps a single guest from occupying the
+	// host's whole suggestion list.
+	MaxPendingSuggestionsPerUser = 3
 	// Connection limits
 	MaxClients           = 10000
 	MaxRooms             = 10000

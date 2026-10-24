@@ -158,9 +158,9 @@ type VoteSkipPayload struct {
 }
 
 type SkipVotesPayload struct {
-	TrackID  string   `json:"track_id"`
-	VoterIDs []string `json:"voter_ids"`
-	Threshold int     `json:"threshold"`
+	TrackID   string   `json:"track_id"`
+	VoterIDs  []string `json:"voter_ids"`
+	Threshold int      `json:"threshold"`
 }
 
 type SuggestionReceivedPayload struct {

@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	pb "github.com/MetrolistGroup/metroserver/proto"
+	pb "github.com/Hud-sonn/soundsphere-listen/proto"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/proto"
 )

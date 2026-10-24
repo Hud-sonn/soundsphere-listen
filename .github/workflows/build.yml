@@ -58,8 +58,7 @@ jobs:
               uses: codecov/codecov-action@v5
               with:
                   files: ./coverage.out
-                  fail_ci_if_error: true
-                  use_oidc: true
+                  fail_ci_if_error: false
 
     build:
         needs: test

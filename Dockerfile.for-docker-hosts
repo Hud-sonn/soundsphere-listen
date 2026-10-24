@@ -20,7 +20,7 @@ ENV PATH="/root/go/bin:${PATH}"
 # Copy source code
 COPY . .
 
-# Generate protobuf files from submodule
+# Generate protobuf files from the vendored schema
 RUN bash scripts/generate_proto.sh
 
 # Build the application
